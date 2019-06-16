@@ -40,7 +40,7 @@ def displaydata():
     return render_template('searchearth.html')#ci=row, t=executiontime)
 
 @app.route('/multiplerun',methods=['POST','GET'])
-def index():
+def multiplrun():
     return render_template('count.html')#, t=exectime)
 
 if __name__ == '__main__':
