@@ -1,4 +1,7 @@
 from flask import Flask
+import mysql.connector
+from mysql.connector import errorcode
+
 app = Flask(__name__)
 
 @app.route("/")
