@@ -35,6 +35,14 @@ def index():
 
     return render_template('assign3.html')
 
+@app.route('/displaydata',methods=['POST','GET'])
+def displaydata():
+    return render_template('searchearth.html')#ci=row, t=executiontime)
+
+@app.route('/multiplerun',methods=['POST','GET'])
+def index():
+    return render_template('count.html')#, t=exectime)
+
 if __name__ == '__main__':
   app.run()
 
