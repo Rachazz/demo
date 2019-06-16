@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello World! Assignmnet3 getting hang of it-perfect"
+    return "Hello World! Assignmnet3 getting hang of it-perfect-sql"
 
 if __name__ == '__main__':
   app.run()
