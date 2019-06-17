@@ -46,7 +46,7 @@ def displaydata():
 
 
     return render_template('assign3.html')
-
+'''
 @app.route('/multiplerun',methods=['POST','GET'])
 def multiplrun():
 
@@ -88,7 +88,7 @@ def multiplrun():
 
     return render_template('assign3.html')
 
-
+'''
 if __name__ == '__main__':
   app.run()
 
