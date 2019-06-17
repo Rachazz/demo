@@ -37,6 +37,20 @@ def displaydata():
         return render_template('searchearth.html',ci=row, t=executiontime)
     #return render_template('assign3.html')
 
+@app.route('/multiplerun',methods=['POST','GET'])
+def multiplrun():
+
+    myHostname = "assign3.redis.cache.windows.net"
+    myPassword = "k3KsDLYj7yQIocfH7Wz3VwLOoI2z2iPSdomO1nixvKo="
+    conn = mysql.connector.connect(**config)
+    r = redis.StrictRedis(host=myHostname, port=6380,db=0,password=myPassword,ssl=True)
+    cursor = conn.cursor()
+
+
+
+    return render_template('assign3.html')
+
+
 
 if __name__ == '__main__':
   app.run()
