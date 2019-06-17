@@ -8,5 +8,4 @@ mysql==0.0.2
 mysql-connector==2.2.9
 redis==3.2.1
 datetime==4.6.0
-hashlib
-pickle
+
