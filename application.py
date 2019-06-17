@@ -2,7 +2,6 @@ from flask import Flask,render_template,request
 import mysql.connector
 
 import time
-import redis
 
 
 
@@ -36,7 +35,7 @@ def displaydata():
         end = time.time()
         executiontime = end - start
         return render_template('searchearth.html',ci=row, t=executiontime)
-    #return render_template('assign3.html')
+    return render_template('assign3.html')
 
 
 if __name__ == '__main__':
