@@ -20,6 +20,23 @@ config = {
 def index():
     return render_template('assign3.html')
 
+@app.route('/displaydata',methods=['POST','GET'])
+def displaydata():
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    print("Connection")
+    row=[]
+    if request.method=="POST":
+        num=int(request.form['num'])
+        start = time.time()
+        for i in range(1,num):
+            cursor.execute("SELECT * FROM earthquake")
+            row = cursor.fetchall()
+        end = time.time()
+        executiontime = end - start
+        return render_template('searchearth.html',ci=row, t=executiontime)
+    #return render_template('assign3.html')
+
 
 if __name__ == '__main__':
   app.run()
