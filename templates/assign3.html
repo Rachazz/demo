@@ -9,18 +9,17 @@
 <h5>1001644227</h5>
 
 <p>
- <form action="/displaydata" method="get">
-   Magnitude Range from<input type="text" name="rangefrom1" maxlength="200" width="60"> <br/>
- 	Magnitude Range To<input type="text" name="rangeto1" maxlength="200" width="60"><br/>
-	Number of queries to run:<input type="text" name="nom1" maxlength="200" width="60"></br>
+ <form action="/displaydata" method="POST">
+
+	Number of queries to run:<input type="number" name="num" maxlength="200" width="60"></br>
    <input type="submit" value="query without cache"><br/><br/>
 </form>
 </p>
 <p>
- <form action="/multiplerun" method="get">
+ <form action="/multiplerun" method="POST">
 	Magnitude Range from<input type="text" name="rangefrom" maxlength="200" width="60"> <br/>
  	Magnitude Range To<input type="text" name="rangeto" maxlength="200" width="60"><br/>
-	Number of queries to run:<input type="text" name="nom" maxlength="200" width="60"></br>
+	Number of queries to run:<input type="text" name="num" maxlength="200" width="60"></br>
    <input type="submit" value="query with cache"><br/><br/>
 </form>
 </p>
