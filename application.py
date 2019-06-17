@@ -38,7 +38,7 @@ def displaydata():
     conn.commit()
     cursor.close()
     conn.close()
-    print('Done!!!')
+    print('Done')
 
     return render_template('searchearth.html',ci=row, t=executiontime)
 
