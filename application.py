@@ -2,7 +2,7 @@ from flask import Flask,render_template,request
 import mysql.connector
 
 import time
-import redis
+
 
 
 
@@ -20,65 +20,7 @@ config = {
 def index():
     return render_template('assign3.html')
 
-@app.route('/displaydata',methods=['POST','GET'])
-def displaydata():
-    conn = mysql.connector.connect(**config)
-    cursor = conn.cursor()
-    print("Connection")
-    row=[]
-    if request.method=="POST":
-        num=int(request.form['num'])
-        start = time.time()
-        for i in range(1,num):
-            cursor.execute("SELECT * FROM earthquake")
-            row = cursor.fetchall()
-        end = time.time()
-        executiontime = end - start
-        return render_template('searchearth.html',ci=row, t=executiontime)
-    #return render_template('assign3.html')
-'''
-@app.route('/multiplerun',methods=['POST','GET'])
-def multiplrun():
 
-    myHostname = "assign3.redis.cache.windows.net"
-    myPassword = "k3KsDLYj7yQIocfH7Wz3VwLOoI2z2iPSdomO1nixvKo="
-    conn = mysql.connector.connect(**config)
-    r = redis.StrictRedis(host=myHostname, port=6380,db=0,password=myPassword,ssl=True)
-    cursor = conn.cursor()
-
-    if request.method=="POST":
-        num=int(request.form['num'])
-
-        start = time.time()
-        for i in range(0,int(num)):
-            #query=cursor.execute("SELECT * FROM earthquake")
-            query="SELECT * FROM earthquake"
-            hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
-            key="redis_cache:"+hash
-            if (r.get(key)):
-                print("redis cached")
-            else:
-                cursor.execute(query)
-                row = cursor.fetchall()
-                rows = []
-                for j in row:
-                    rows.append(str(j))
-                # Put data into cache for 1 hour
-                r.set(key, pickle.dumps(list(rows)) )
-                r.expire(key, 36);
-        end=time.time()
-        executiontime = end - start
-        return render_template('count.html', t=executiontime)
-
-        # Cleanup
-        conn.commit()
-        cursor.close()
-        conn.close()
-        print('Done')
-
-    return render_template('assign3.html')
-
-'''
 if __name__ == '__main__':
   app.run()
 
