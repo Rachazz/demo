@@ -23,6 +23,7 @@ def index():
 def displaydata():
     conn = mysql.connector.connect(**config)
     cursor = conn.cursor()
+    print("Connection")
     if request.method=="POST":
         num=int(request.form['num'])
 
