@@ -28,24 +28,14 @@ def displaydata():
     row=[]
     if request.method=="POST":
         num=int(request.form['num'])
-
         start = time.time()
         for i in range(1,num):
             cursor.execute("SELECT * FROM earthquake")
             row = cursor.fetchall()
-
         end = time.time()
         executiontime = end - start
         return render_template('searchearth.html',ci=row, t=executiontime)
-
-    # Cleanup
-    conn.commit()
-    cursor.close()
-    conn.close()
-    print('Done')
-
-
-    return render_template('assign3.html')
+    #return render_template('assign3.html')
 '''
 @app.route('/multiplerun',methods=['POST','GET'])
 def multiplrun():
