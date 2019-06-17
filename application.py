@@ -29,9 +29,12 @@ def displaydata():
     row=[]
     if request.method=="POST":
         num=int(request.form['num'])
+        magni=request.form['m']
         start = time.time()
         for i in range(1,num):
-            cursor.execute("SELECT * FROM earthquake where mag>9")
+            query="SELECT * FROM earthquake"
+            #query='select count(*) from earthquake where "mag">\''+magni+'\''
+            cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
         executiontime = end - start
@@ -50,11 +53,13 @@ def multiplrun():
 
     if request.method=="POST":
         num=int(request.form['num'])
+        magni=request.form['m']
 
         start = time.time()
         for i in range(0,int(num)):
-            #query=cursor.execute("SELECT * FROM earthquake")
-            query="SELECT * FROM earthquake where mag>9"
+            query=cursor.execute("SELECT * FROM earthquake")
+            #query="SELECT * FROM earthquake where mag>9"
+            #query='select count(*) from earthquake where "mag">\''+magni+'\''
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
