@@ -19,18 +19,15 @@ config = {
 
 @app.route("/")
 def index():
-
-
-
-
     return render_template('assign3.html')
 
 @app.route('/displaydata',methods=['POST','GET'])
 def displaydata():
     conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
     if request.method=="POST":
         num=int(request.form['num'])
-        cursor = conn.cursor()
+
         start = time.time()
         for i in range(1,num):
             cursor.execute("SELECT * FROM earthquake")
@@ -56,10 +53,11 @@ def multiplrun():
     myPassword = "k3KsDLYj7yQIocfH7Wz3VwLOoI2z2iPSdomO1nixvKo="
     conn = mysql.connector.connect(**config)
     r = redis.StrictRedis(host=myHostname, port=6380,db=0,password=myPassword,ssl=True)
+    cursor = conn.cursor()
 
     if request.method=="POST":
         num=int(request.form['num'])
-        cursor = conn.cursor()
+
         start = time.time()
         for i in range(0,int(num)):
             #query=cursor.execute("SELECT * FROM earthquake")
