@@ -47,8 +47,13 @@ def multiplrun():
     cursor = conn.cursor()
 
 
+    if request.method=="POST":
+        num=int(request.form['num'])
 
-    return render_template('assign3.html')
+
+
+
+    return "Success"
 
 
 
