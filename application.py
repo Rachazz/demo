@@ -29,7 +29,7 @@ def displaydata():
     row=[]
     if request.method=="POST":
         num=int(request.form['num'])
-        #magni=request.form['m']
+        magni=request.form['m']
         start = time.time()
         for i in range(1,num):
             query="SELECT * FROM earthquake"
@@ -53,7 +53,7 @@ def multiplrun():
 
     if request.method=="POST":
         num=int(request.form['num'])
-        #magni=request.form['m']
+        magni=request.form['m']
 
         start = time.time()
         for i in range(0,int(num)):
