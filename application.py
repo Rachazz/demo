@@ -50,6 +50,13 @@ def multiplrun():
     if request.method=="POST":
         num=int(request.form['num'])
 
+        start = time.time()
+
+        end=time.time()
+        executiontime = end - start
+        return render_template('count.html', t=executiontime)
+
+
 
 
 
