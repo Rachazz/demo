@@ -31,7 +31,7 @@ def displaydata():
         num=int(request.form['num'])
         start = time.time()
         for i in range(1,num):
-            cursor.execute("SELECT * FROM earthquake")
+            cursor.execute("SELECT * FROM earthquake where mag>9")
             row = cursor.fetchall()
         end = time.time()
         executiontime = end - start
@@ -54,7 +54,7 @@ def multiplrun():
         start = time.time()
         for i in range(0,int(num)):
             #query=cursor.execute("SELECT * FROM earthquake")
-            query="SELECT * FROM earthquake"
+            query="SELECT * FROM earthquake where mag>9"
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
