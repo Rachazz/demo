@@ -3,7 +3,8 @@ import mysql.connector
 
 import time
 import redis
-
+import hashlib
+import pickle
 
 
 app = Flask(__name__)
@@ -51,6 +52,23 @@ def multiplrun():
         num=int(request.form['num'])
 
         start = time.time()
+        for i in range(0,int(num)):
+            #query=cursor.execute("SELECT * FROM earthquake")
+            query="SELECT * FROM earthquake"
+            hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
+            key="redis_cache:"+hash
+            if (r.get(key)):
+                print("redis cached")
+            else:
+                cursor.execute(query)
+                row = cursor.fetchall()
+                rows = []
+                for j in row:
+                    rows.append(str(j))
+                # Put data into cache for 1 hour
+                r.set(key, pickle.dumps(list(rows)) )
+                r.expire(key, 36);
+
 
         end=time.time()
         executiontime = end - start
