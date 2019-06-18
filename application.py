@@ -31,12 +31,15 @@ def displaydata():
         num=int(request.form['num'])
         magni1=request.form['m1']
         magni2=request.form['m2']
+        time1=request.form['t1']
+        time2=request.form['t2']
         start = time.time()
         for i in range(1,num):
             #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
             #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
-            query='select "depth" from earthquake where "mag"=2'
+            #query='select "depth" from earthquake where "mag"=2'
+            query='select * from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\' and "time" between \''+time1+'\'and \''+time2+'\''
             cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
@@ -58,6 +61,8 @@ def multiplrun():
         num=int(request.form['num'])
         magni1=request.form['m1']
         magni2=request.form['m2']
+        time1=request.form['t1']
+        time2=request.form['t2']
 
         start = time.time()
         for i in range(0,int(num)):
@@ -65,7 +70,8 @@ def multiplrun():
             #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
             #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
-            query='select "depth" from earthquake where "mag"=2'
+            #query='select "depth" from earthquake where "mag"=2'
+            query='select * from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\' and "time" between \''+time1+'\'and \''+time2+'\''
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
