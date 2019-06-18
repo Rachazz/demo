@@ -83,10 +83,8 @@ def multiplrun():
             #query='select * from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\' and "time" between \''+time1+'\'and \''+time2+'\''
             query='select * from earthquake where "latitude" between \''+lat1+'\' and \''+lat2+'\' and "longitude" between \''+long1+'\'and \''+long2+'\''
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
-
             key="redis_cache:"+hash
             ### 1st method
-
             if (r.get(key)):
                 print("redis cached!.")
             else:
@@ -97,8 +95,6 @@ def multiplrun():
                     rows.append(str(j))
                 # Put data into cache for 1 hour
                 r.set(key, pickle.dumps(list(rows)))
-
-
             ### 2nd method
             '''
             result = r.get(key)
@@ -108,12 +104,9 @@ def multiplrun():
                 row = cursor.fetchall()
                 r.set(key, row)
             '''
-
         end=time.time()
         executiontime = end - start
         return render_template('count.html', t=executiontime)
-
-
 
 if __name__ == '__main__':
   app.run()
