@@ -9,15 +9,17 @@
 <h5>1001644227</h5>
 
 <p>
- <form action="/displaydata" method="POST">
-    Magnitude Range:<input type="text" name="m" maxlength="200" width="60"> <br/>
+ <form action="/withoutcache" method="POST">
+    Magnitude Range1:<input type="text" name="m1" maxlength="200" width="60"> <br/>
+    Magnitude Range2:<input type="text" name="m2" maxlength="200" width="60"> <br/>
 	Number of queries to run:<input type="text" name="num" maxlength="200" width="60"></br>
    <input type="submit" value="query without cache"><br/><br/>
 </form>
 </p>
 <p>
- <form action="/multiplerun" method="POST">
-    Magnitude Range:<input type="text" name="m" maxlength="200" width="60"> <br/>
+ <form action="/rediscache" method="POST">
+    Magnitude Range1:<input type="text" name="m1" maxlength="200" width="60"> <br/>
+    Magnitude Range2:<input type="text" name="m2" maxlength="200" width="60"> <br/>
 	Number of queries to run:<input type="text" name="num" maxlength="200" width="60"></br>
    <input type="submit" value="query with cache"><br/><br/>
 </form>
