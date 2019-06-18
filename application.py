@@ -86,7 +86,7 @@ def multiplrun():
             key="redis_cache:"+hash
             ### 1st method
             if (r.get(key)):
-                print("redis cached!.")
+                print("redis cached!")
             else:
                 cursor.execute(query)
                 row = cursor.fetchall()
