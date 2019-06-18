@@ -63,7 +63,7 @@ def multiplrun():
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
-                print("redis cached")
+                print("redis cached!")
             else:
                 cursor.execute(query)
                 row = cursor.fetchall()
