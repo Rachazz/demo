@@ -5,6 +5,7 @@ import time
 import redis
 import hashlib
 import pickle
+from random import randint
 
 
 app = Flask(__name__)
