@@ -21,7 +21,7 @@ config = {
 def index():
     return render_template('assign3.html')
 
-@app.route('/displaydata',methods=['POST','GET'])
+@app.route('/withoutcache',methods=['POST','GET'])
 def displaydata():
     conn = mysql.connector.connect(**config)
     cursor = conn.cursor()
@@ -29,11 +29,13 @@ def displaydata():
     row=[]
     if request.method=="POST":
         num=int(request.form['num'])
-        magni=request.form['m']
+        magni1=request.form['m1']
+        magni2=request.form['m2']
         start = time.time()
         for i in range(1,num):
-            query="SELECT * FROM earthquake"
+            #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
+            query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
             cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
@@ -41,7 +43,7 @@ def displaydata():
         return render_template('searchearth.html',ci=row, t=executiontime)
     #return render_template('assign3.html')
 
-@app.route('/multiplerun',methods=['POST','GET'])
+@app.route('/rediscache',methods=['POST','GET'])
 def multiplrun():
 
     myHostname = "assign3.redis.cache.windows.net"
@@ -53,13 +55,15 @@ def multiplrun():
 
     if request.method=="POST":
         num=int(request.form['num'])
-        magni=request.form['m']
+        magni1=request.form['m1']
+        magni2=request.form['m2']
 
         start = time.time()
         for i in range(0,int(num)):
             #query=cursor.execute("SELECT * FROM earthquake")
-            query="SELECT * FROM earthquake"
+            #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
+            query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
