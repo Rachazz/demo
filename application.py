@@ -35,7 +35,8 @@ def displaydata():
         for i in range(1,num):
             #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
-            query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
+            #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
+            query='select "depth" from earthquake where "mag"=2'
             cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
@@ -63,7 +64,8 @@ def multiplrun():
             #query=cursor.execute("SELECT * FROM earthquake")
             #query="SELECT * FROM earthquake"
             #query='select count(*) from earthquake where "mag">\''+magni+'\''
-            query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
+            #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
+            query='select "depth" from earthquake where "mag"=2'
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             if (r.get(key)):
@@ -77,17 +79,9 @@ def multiplrun():
                 # Put data into cache for 1 hour
                 r.set(key, pickle.dumps(list(rows)) )
                 r.expire(key, 36);
-
-
         end=time.time()
         executiontime = end - start
         return render_template('count.html', t=executiontime)
-
-
-
-
-
-
 
 
 
