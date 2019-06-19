@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Values</title>
+</head>
+<body>
+<h2>Patil, Rachana Naganagouda......</h2>
+<h1>1001644227</h1>
+
+{{value}}
+
+ <table>
+    <thead>
+    <tr>
+        <th>Quake Result:::::::::::::::::::::::::::::</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        {% for rows in value %}
+            <tr>
+
+                <td>The result({{rows["time"]}})</td>
+                <td>{{rows['latitude']}}</td>
+                <td>{{rows['longitude']}}</td>
+                <td>{{rows['depthError']}}</td>
+
+
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>
