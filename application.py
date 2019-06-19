@@ -59,24 +59,15 @@ def multiplrun():
 
     if request.method=="POST":
         num=int(request.form['num'])
-        #magni1=request.form['m1']
-        #magni2=request.form['m2']
-        lat1=request.form['lat1']
-        long1=request.form['long1']
-        lat2=request.form['lat2']
-        long2=request.form['long2']
-        #time1=request.form['t1']
-        #time2=request.form['t2']
+        d1=float(request.form['d1'])
+        d2=float(request.form['d2'])
 
         start = time.time()
         for i in range(0,int(num)):
-            #query=cursor.execute("SELECT * FROM earthquake")
-            #query="SELECT * FROM earthquake"
-            #query='select count(*) from earthquake where "mag">\''+magni+'\''
-            #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
-            #query='select "depth" from earthquake where "mag"=2'
-            #query='select * from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\' and "time" between \''+time1+'\'and \''+time2+'\''
-            query='select * from earthquake where "latitude" between \''+lat1+'\' and \''+lat2+'\' and "longitude" between \''+long1+'\'and \''+long2+'\''
+            mag1= round(random.uniform(d1, d2),1)
+            mag2= round(random.uniform(d1, d2),1)
+
+            query='select * from earthquake where "depthError" between '+str(mag1)+' and '+str(mag2)+''
             hash = hashlib.sha224(query.encode('utf-8')).hexdigest()
             key="redis_cache:"+hash
             ### 1st method
