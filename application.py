@@ -5,7 +5,7 @@ import time
 import redis
 import hashlib
 import pickle
-from random import randint
+import random
 
 
 app = Flask(__name__)
@@ -30,22 +30,16 @@ def displaydata():
     row=[]
     if request.method=="POST":
         num=int(request.form['num'])
-        #magni1=request.form['m1']
-        #magni2=request.form['m2']
-        #time1=request.form['t1']
-        #time2=request.form['t2']
-        lat1=request.form['lat1']
-        long1=request.form['long1']
-        lat2=request.form['lat2']
-        long2=request.form['long2']
+        d1=float(request.form['d1'])
+        d2=float(request.form['d2'])
+
         start = time.time()
-        for i in range(1,num):
-            #query="SELECT * FROM earthquake"
-            #query='select count(*) from earthquake where "mag">\''+magni+'\''
-            #query='select count(*) from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\''
-            #query='select "depth" from earthquake where "mag"=2'
-            #query='select * from earthquake where "mag" between \''+magni1+'\' and \''+magni2+'\' and "time" between \''+time1+'\'and \''+time2+'\''
-            query='select * from earthquake where "latitude" between \''+lat1+'\' and \''+lat2+'\' and "longitude" between \''+long1+'\'and \''+long2+'\''
+        for i in range(0,num):
+            mag1= round(random.uniform(d1, d2),1)
+            mag2= round(random.uniform(d1, d2),1)
+
+
+            query='select * from earthquake where "depthError" between '+str(mag1)+' and '+str(mag2)+''
             cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
@@ -108,6 +102,32 @@ def multiplrun():
         end=time.time()
         executiontime = end - start
         return render_template('count.html', t=executiontime)
+
+
+@app.route('/display',methods=['POST','GET'])
+def display():
+    conn = mysql.connector.connect(**config)
+    cursor = conn.cursor()
+    print("Connection...")
+    row=[]
+    if request.method=="POST":
+
+        d1=request.form['d1']
+        print(d1)
+        d2=request.form['d2']
+        print(d2)
+        print("values depth")
+        long1=request.form['long1']
+        print(long1)
+        query='select count(*) from earthquake where "depthError">1'
+        #query='select * from earthquake where "depthError" between \''+d1+'\' and \''+d2+'\' and "longitude"> \''+long1+'\''
+        print("query")
+        cursor.execute(query)
+        row = cursor.fetchall()
+        print(row)
+        print("fetching")
+        return render_template('display_values.html',value=row)
+    #return render_template('assign3.html')
 
 if __name__ == '__main__':
   app.run()
