@@ -114,7 +114,7 @@ def display():
         #query='select count(*) from earthquake where "depthError">1'
         query="select time,latitude,longitude,depthError from earthquake where (depthError between "+d1+" and "+d2+") and longitude> "+long1
         #query="SELECT longitude, depth, mag, place FROM earthquaketable WHERE latitude BETWEEN " + range1 + " and " + range2
-        print("query")
+        print("query...")
         cursor.execute(query)
         row = cursor.fetchall()
         print(row)
