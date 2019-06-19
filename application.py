@@ -39,7 +39,7 @@ def displaydata():
             mag2= round(random.uniform(d1, d2),1)
 
 
-            query='select * from earthquake where "depthError" between '+str(mag1)+' and '+str(mag2)+''
+            query='select count(*) from earthquake where "depthError" between '+str(mag1)+' and '+str(mag2)+''
             cursor.execute(query)
             row = cursor.fetchall()
         end = time.time()
@@ -110,8 +110,10 @@ def display():
         print("values depth")
         long1=request.form['long1']
         print(long1)
-        query='select count(*) from earthquake where "depthError">1'
-        #query='select * from earthquake where "depthError" between \''+d1+'\' and \''+d2+'\' and "longitude"> \''+long1+'\''
+        print(type(long1))
+        #query='select count(*) from earthquake where "depthError">1'
+        query="select time,latitude,longitude,depthError from earthquake where (depthError between "+d1+" and "+d2+") and longitude> "+long1
+        #query="SELECT longitude, depth, mag, place FROM earthquaketable WHERE latitude BETWEEN " + range1 + " and " + range2
         print("query")
         cursor.execute(query)
         row = cursor.fetchall()
